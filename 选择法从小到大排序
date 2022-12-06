@@ -1,0 +1,21 @@
+#include<stdio.h>
+int main()
+{
+    int i, j, temp, a[10];
+    printf("请输入数组中的值：");
+    for (i = 0; i < 10; i++)
+    {
+        scanf_s("%d", &a[i]);
+    }
+    for (i = 0; i < 9; i++)
+    {
+        for (j = i + 1; j < 10; j++)
+        {
+            if (a[i] > a[j])
+            {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
