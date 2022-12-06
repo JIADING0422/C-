@@ -1,0 +1,23 @@
+#include<stdio.h>
+int main()
+{
+    int i, j, min, temp, a[10];
+    printf("请输入数组中的值：");
+    for (i = 0; i < 10; i++)
+    {
+        scanf_s("%d", &a[i]);
+    }
+    for (i = 0; i <= 10; i++)
+    {
+        min = i;
+        for (j = i + 1; j <= 9; j++)
+            if (a[min] > a[j])
+                min = j;
+        temp = a[i]; a[i] = a[min]; a[min] = temp;
+    }
+    printf("由小到大的排序是：\n");
+    for (i = 0; i < 10; i++)
+    {
+        printf("%d ", a[i]);
+    }
+}
