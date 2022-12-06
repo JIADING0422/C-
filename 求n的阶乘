@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	int n=0;
+	int sum=1;
+	printf("请输入n的值：");
+	scanf_s("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		sum = sum * i;
+	}
+	printf("%d\n", sum);
+	return 0;
+}
