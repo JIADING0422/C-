@@ -1,0 +1,12 @@
+#include<stdio.h>
+int main()
+{
+ int i1, i2, i3, i4, i5;
+ for (i1 = 0; i1 < 2; i1++)
+ for (i2 = 0; i2 < 2; i2++)
+ for (i3 = 0; i3 < 2; i3++)
+ for (i4 = 0; i4 < 2; i4++)
+ for (i5 = 0; i5 < 2; i5++)
+ printf("%d%d%d%d%d\n", i1, i2, i3, i4, i5);
+ return 0;
+}
