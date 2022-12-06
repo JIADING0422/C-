@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main(void)
+{
+ int i, m;
+ printf("请输入你要判断的数：\n");
+ scanf_s("%d,&m");
+ i = 2;
+ while (i < m)
+ {
+  if (m % i == 0)
+   break;
+  else
+   i++;
+ }
+ if (i == m)
+  printf("%d是素数\n", m);
+ else
+  printf(" % d不是素数\n", m);
+ return 0;
+}
