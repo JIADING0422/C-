@@ -1,0 +1,22 @@
+#include <stdio.h>
+int gcd(int x, int y)
+{
+    int r;
+    r = x % y;
+    while (r != 0)
+    {
+        x = y;
+        y = r;
+        r = x % y;
+    }
+    return y;
+}
+int main()
+{
+    int a, b, c, t;
+    scanf_s("%d%d%d", &a, &b, &c);
+    t = gcd(a, b);
+    t = gcd(t, c);
+    printf("gcd=%d\n", t);
+    return 0;
+}
