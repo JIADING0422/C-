@@ -1,0 +1,22 @@
+#include <stdio.h>
+int fun(int a);
+int main()
+{
+ int n;
+ printf("请输入要求的阶乘\n");
+ scanf_s("%d", &n);
+
+ printf("%d!=%d",n, fun(n));
+ return 0;
+}
+
+int fun(int a)
+{
+ long l = 0;
+ if (a == 0)
+  return 1;
+ else
+  l = fun(a - 1) * a;
+ return l;
+
+}
