@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+static void add(int a, int b);
+void sub(int a, int b);
+void mul(int a, int b);
+void Div(int a, int b);
+void menu();
+void calc(int input, int x, int y);
+
+int main()
+{
+    int input = 1;
+    int x = 0;
+    int y = 0;
+    while (input)
+    {
+        menu();
+        printf("请选择：");
+        scanf_s("%d", &input);
+
+        if (input >= 1 && input <= 4)
+        {
+            printf("输入两个数：");
+            scanf_s("%d%d", &x, &y);
+        }
+
+        calc(input, x, y);
+    }
+    return 0;
+}
+
+void add(int a, int b)
+{
+    printf("%d+%d=%d\n", a, b, a + b);
+}
+void sub(int a, int b)
+{
+    printf("%d-%d=%d\n", a, b, a - b);
+
+}
+void mul(int a, int b)
+{
+    printf("%d*%d=%d\n", a, b, a * b);
+}
+void Div(int a, int b)
+{
+    if (b == 0)
+        printf("eorr\n");
+    else
+        printf("%d/%d=%d\n", a, b, (float)(a / b));
+}
+void menu()
+{
+    printf("*************************************\n");
+    printf("****1.add             2.sub**********\n");
+    printf("****3.mul             4.Div**********\n");
+    printf("*************0.eixt******************\n");
+    printf("*************************************\n");
+}
+void calc(int input, int x, int y)
+{
+    switch (input)
+    {
+    case 1:
+        add(x, y);
+        break;
+    case 2:
+        sub(x, y);
+        break;
+    case 3:
+        mul(x, y);
+        break;
+    case 4:
+        Div(x, y);
+        break;
+    case 0:
+        printf("退出\n");
+        break;
+    default:
+        printf("输入不对");
+        break;
+
+    }
+}
