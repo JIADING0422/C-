@@ -1,0 +1,19 @@
+#include <stdio.h>
+int max_2(int t, int i);
+int main()
+{
+	int a, b, c, d, max;
+	printf("请输入四个数:\n");
+	scanf_s("%d%d%d%d", &a, &b, &c, &d);
+	max = max_2(max_2(a, b), max_2(c, d));
+	printf("最大值是%d\n", max);
+	return 0;
+
+}
+int max_2(int y, int x)
+{
+	if (y > x)
+		return y;
+	else
+		return x;
+}
