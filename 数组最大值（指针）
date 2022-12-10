@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int a[5] = { 7,8,5,1,2 };
+	int i;
+	int x;
+	int* p;
+	p = a;
+	for (p = a; p < a + 5; p++)
+	{
+		printf("%-4d", *p);
+	}
+	int max;
+	max = a[0];
+	for (i = 1; i < 5; i++)
+	{
+		if (a[i] > max)
+		{
+			max = a[i];
+			x=i;
+		}
+	}
+	printf("max=%d,x=%d\n", max, x);
+	int temp;
+	temp = a[0];
+	a[0] = a[x];
+	a[x] = temp;
+	for (p = a; p < a + 5; p++)
+	{
+		printf("%-4d", *p);
+	}
+	printf("\n");
+	return 0;
+}
