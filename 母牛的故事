@@ -1,0 +1,23 @@
+#include<stdio.h>
+int cow_count(int n)
+{
+	if (n == 1)
+		return 1;
+	if (n == 2)
+		return 2;
+	if (n == 3)
+		return 3;
+	if (n == 4)
+		return 4;
+	
+	return cow_count(n - 1) + cow_count(n - 3);
+}
+int main()
+{
+	int years;
+	while (scanf_s("%d", &years) && years != 0)
+	{
+		printf("%d", cow_count(years));
+	}
+  return 0；
+}
