@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+// 定义一个函数，用于打印字符串的子串
+void subString(char *string, int start, int end)
+{
+    // 从指定的开始下标到结束下标循环遍历
+    for (int i = start; i <= end; i++)
+    {
+        // 打印字符串的每一个字符
+        printf("%c", string[i]);
+    }
+    // 换行
+    printf("\n");
+}
+
+// 定义一个函数，用于打印字符串的所有子串
+void printAllSubStrings(char *string)
+{
+    // 获取字符串的长度
+    int length = strlen(string);
+    // 第一重循环，遍历字符串的每一个字符作为子串的开始
+    for (int i = 0; i < length; i++)
+    {
+        // 第二重循环，遍历字符串的每一个字符作为子串的结束
+        for (int j = i; j < length; j++)
+        {
+            // 调用 subString 函数，打印当前的子串
+            subString(string, i, j);
+        }
+    }
+}
+
+// 主函数
+int main()
+{
+    // 定义字符串
+    char string[100];
+    // 提示用户输入字符串
+    printf("Enter a string: ");
+    // 读入字符串
+    scanf("%s", string);
+    // 打印提示信息
+    printf("All substrings of %s are: \n", string);
+    // 调用 printAllSubStrings 函数，打印字符串的所有子串
+    printAllSubStrings(string);
+    // 程序结束
+    return 0;
+}
