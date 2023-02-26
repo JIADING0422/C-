@@ -1,0 +1,174 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 100
+
+struct Book {
+    int id;
+    char title[50];
+    char author[50];
+    int year_published;
+    int borrowed;
+};
+
+struct Book books[MAX_BOOKS];
+int num_books = 0;
+
+void add_book() {
+    if (num_books == MAX_BOOKS) {
+        printf("无法添加更多书籍。\n");
+        return;
+    }
+    struct Book new_book;
+    printf("请输入书籍编号：");
+    scanf("%d", &new_book.id);
+    for (int i = 0; i < num_books; i++) {
+        if (books[i].id == new_book.id) {
+            printf("已经有相同编号的书籍了。\n");
+            return;
+        }
+    }
+    printf("请输入书籍名称：");
+    scanf("%s", new_book.title);
+    printf("请输入书籍作者：");
+    scanf("%s", new_book.author);
+    printf("请输入书籍出版年份：");
+    scanf("%d", &new_book.year_published);
+    new_book.borrowed = 0;
+    books[num_books++] = new_book;
+    printf("书籍添加成功！\n");
+}
+
+void display_books() {
+    printf("所有书籍如下：\n");
+    printf("编号\t名称\t作者\t出版年份\t借阅次数\n");
+    for (int i = 0; i < num_books; i++) {
+        printf("%d\t%s\t%s\t%d\t\t%d\n", books[i].id, books[i].title, books[i].author, books[i].year_published, books[i].borrowed);
+    }
+}
+
+void search_book() {
+    char keyword[50];
+    printf("请输入书籍名称或作者关键字：");
+    scanf("%s", keyword);
+    printf("搜索结果如下：\n");
+    printf("编号\t名称\t作者\t出版年份\t借阅次数\n");
+    int found = 0;
+    for (int i = 0; i < num_books; i++) {
+        if (strstr(books[i].title, keyword) != NULL || strstr(books[i].author, keyword) != NULL) {
+            printf("%d\t%s\t%s\t%d\t\t%d\n", books[i].id, books[i].title, books[i].author, books[i].year_published, books[i].borrowed);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("没有找到符合条件的书籍。\n");
+    }
+}
+
+void delete_book() {
+    int id, index = -1;
+    printf("请输入书籍编号：");
+    scanf("%d", &id);
+    for (int i = 0; i < num_books; i++) {
+        if (books[i].id == id) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        printf("没有找到编号为 %d 的书籍。\n", id);
+        return;
+    }
+    for (int i = index; i < num_books - 1; i++) {
+        books[i] = books[i + 1];
+    }
+    num_books--;
+    printf("书籍删除成功！\n");
+}
+
+void borrow_book() {
+    int id, index = -1;
+    printf("请输入书籍编号：");
+    scanf("%d", &id);
+    for (int i = 0; i < num_books; i++) {
+        if (books[i].id == id) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        printf("没有找到编号为 %d 的书籍。\n", id);
+        return;
+    }
+    if (books[index].borrowed) {
+        printf("编号为 %d 的书籍已经被借出去了。\n", id);
+        return;
+    }
+    books[index].borrowed = 1;
+    printf("编号为 %d 的书籍借出成功！\n", id);
+}
+
+void return_book() {
+    int id, index = -1;
+    printf("请输入书籍编号：");
+    scanf("%d", &id);
+    for (int i = 0; i < num_books; i++) {
+        if (books[i].id == id) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        printf("没有找到编号为 %d 的书籍。\n", id);
+        return;
+    }
+    if (!books[index].borrowed) {
+        printf("编号为 %d 的书籍没有被借出去，无法归还。\n", id);
+        return;
+    }
+    books[index].borrowed = 0;
+    printf("编号为 %d 的书籍归还成功！\n", id);
+}
+
+int main() {
+    int choice;
+    while (1) {
+        printf("图书管理系统\n");
+        printf("1. 添加书籍\n");
+        printf("2. 显示所有书籍\n");
+        printf("3. 搜索书籍\n");
+        printf("4. 删除书籍\n");
+        printf("5. 借出书籍\n");
+        printf("6. 归还书籍\n");
+        printf("0. 退出系统\n");
+        printf("请输入操作编号：");
+        scanf("%d", &choice);
+        switch (choice) {
+        case 0:
+            printf("感谢使用图书管理系统，再见！\n");
+            return 0;
+        case 1:
+            add_book();
+            break;
+        case 2:
+            display_books();
+            break;
+        case 3:
+            search_book();
+            break;
+        case 4:
+            delete_book();
+            break;
+        case 5:
+            borrow_book();
+            break;
+        case 6:
+            return_book();
+            break;
+        default:
+            printf("无效的操作编号，请重新输入。\n");
+            break;
+        }
+    }
+    return 0;
+}
