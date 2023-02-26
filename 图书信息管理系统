@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 
 #define MAX_BOOKS 100
@@ -66,46 +66,35 @@ void search_book() {
 }
 
 void delete_book() {
-    int id, index = -1;
-    printf("请输入书籍编号：");
-    scanf("%d", &id);
-    for (int i = 0; i < num_books; i++) {
-        if (books[i].id == id) {
-            index = i;
-            break;
+    int book_id, i, j;
+    printf("请输入要删除的书籍编号：");
+    scanf("%d", &book_id);
+    for (i = 0; i < num_books; i++) {
+        if (books[i].id == book_id) {
+            for (j = i; j < num_books - 1; j++) {
+                books[j] = books[j + 1];
+            }
+            num_books--;
+            printf("删除成功！\n");
         }
     }
-    if (index == -1) {
-        printf("没有找到编号为 %d 的书籍。\n", id);
-        return;
+    if (i == num_books) {
+        printf("没有找到编号为%d的书籍！\n", book_id);
     }
-    for (int i = index; i < num_books - 1; i++) {
-        books[i] = books[i + 1];
-    }
-    num_books--;
-    printf("书籍删除成功！\n");
 }
-
 void borrow_book() {
-    int id, index = -1;
-    printf("请输入书籍编号：");
-    scanf("%d", &id);
-    for (int i = 0; i < num_books; i++) {
-        if (books[i].id == id) {
-            index = i;
-            break;
+    int book_id, i;
+    printf("输入要借阅书籍的编号: ");
+    scanf("%d", &book_id);
+    for (i = 0; i <num_books ; i++) {
+        if (books[i].id == book_id && !books[i].borrowed) {
+            printf("编号%d书籍已成功借出 .\n", book_id);
+            books[i].borrowed = 0;
+            books[i].borrowed++; 
+            return;
         }
     }
-    if (index == -1) {
-        printf("没有找到编号为 %d 的书籍。\n", id);
-        return;
-    }
-    if (books[index].borrowed) {
-        printf("编号为 %d 的书籍已经被借出去了。\n", id);
-        return;
-    }
-    books[index].borrowed = 1;
-    printf("编号为 %d 的书籍借出成功！\n", id);
+    printf("Book %d is not found or has been borrowed.\n", book_id);
 }
 
 void return_book() {
@@ -126,7 +115,6 @@ void return_book() {
         printf("编号为 %d 的书籍没有被借出去，无法归还。\n", id);
         return;
     }
-    books[index].borrowed = 0;
     printf("编号为 %d 的书籍归还成功！\n", id);
 }
 
