@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// 比较函数用于qsort
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int main() {
+    int m;
+
+    // 输入整数m
+    printf("请输入整数m：");
+    scanf_s("%d", &m);
+
+    // 动态分配内存来创建数组
+    int* dynamicArray = (int*)malloc(m * sizeof(int));
+
+    if (dynamicArray == NULL) {
+        printf("内存分配失败\n");
+        return 1;
+    }
+
+    // 输入m个整数
+    printf("请输入%d个整数：\n", m);
+    for (int i = 0; i < m; i++) {
+        scanf_s("%d", &dynamicArray[i]);
+    }
+
+    // 使用qsort函数升序排序
+    qsort(dynamicArray, m, sizeof(int), compare);
+
+    // 输出排序后的数组
+    printf("升序排序后的数组：\n");
+    for (int i = 0; i < m; i++) {
+        printf("%d ", dynamicArray[i]);
+    }
+
+    // 释放动态分配的内存
+    free(dynamicArray);
+
+    return 0;
+}
+  
